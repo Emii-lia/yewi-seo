@@ -1,0 +1,12 @@
+/target
+Cargo.lock
+.idea
+
+/packages/yewi-seo/target
+/packages/yewi-seo/Cargo.lock
+
+/packages/yewi-seo-macros/target
+/packages/yewi-seo-macros/Cargo.lock
+
+/examples/basic/node_modules
+/examples/basic/dist

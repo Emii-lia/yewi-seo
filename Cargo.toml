@@ -1,0 +1,9 @@
+[workspace]
+members = [
+    "packages/*",
+    "examples/*"
+]
+default-members = [
+    "packages/*"
+]
+resolver = "3"
