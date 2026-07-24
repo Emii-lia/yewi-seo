@@ -1,0 +1,5 @@
+error: Invalid key: x
+ --> tests/apply_meta/invalid_attribute_fail.rs:7:5
+  |
+7 |     x = "value"
+  |     ^

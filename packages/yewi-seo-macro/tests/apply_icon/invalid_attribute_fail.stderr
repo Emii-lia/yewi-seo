@@ -1,0 +1,5 @@
+error: Invalid key: x
+ --> tests/apply_icon/invalid_attribute_fail.rs:6:17
+  |
+6 |   apply_icon!(( x = "value", href = "https://yewi.fiaro.app/icons/logo.png"));
+  |                 ^

@@ -1,0 +1,5 @@
+error: Invalid key: x
+ --> tests/apply_twitter_card/invalid_attribute_fail.rs:6:24
+  |
+6 |   apply_twitter_card!( x = "value" );
+  |                        ^
