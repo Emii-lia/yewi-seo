@@ -11,7 +11,3 @@ description = "A Yew library for managing SEO metadata in web applications."
 [dependencies]
 web-sys = { version = "0.3.103", features = [ "Document", "Element", "HtmlHeadElement", "Window"]}
 yewi-seo-macro = { path = "../yewi-seo-macro" }
-
-[dev-dependencies]
-wasm-bindgen-test = { workspace = true }
-yew = "0.23.0"
