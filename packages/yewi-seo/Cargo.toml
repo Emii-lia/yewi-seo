@@ -1,0 +1,17 @@
+[package]
+name = "yewi-seo"
+version = "0.1.0"
+edition = "2024"
+authors = ["Fiaro <fiaromiangaly@gmail.com>"]
+keywords = ["yew", "seo", "yewi-kit", "head", "web"]
+categories = ["web-programming", "wasm", "gui"]
+repository = "https://github.com/Emii-lia/yewi-seo"
+description = "A Yew library for managing SEO metadata in web applications."
+
+[dependencies]
+web-sys = { version = "0.3.103", features = [ "Document", "Element", "HtmlHeadElement", "Window"]}
+yewi-seo-macro = { path = "../yewi-seo-macro" }
+
+[dev-dependencies]
+wasm-bindgen-test = { workspace = true }
+yew = "0.23.0"
