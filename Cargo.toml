@@ -7,3 +7,7 @@ default-members = [
     "packages/*"
 ]
 resolver = "3"
+
+[workspace.dependencies]
+trybuild = "1.0.118"
+rustversion = "1.0.23"
