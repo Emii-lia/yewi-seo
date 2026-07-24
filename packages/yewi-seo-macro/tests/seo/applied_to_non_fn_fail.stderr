@@ -1,0 +1,12 @@
+error: #[seo(...)] can only be applied to functions, e.g.:
+       #[seo(...)]
+       #[component(Foo)]
+       fn foo() -> Html { ... }
+ --> tests/seo/applied_to_non_fn_fail.rs:3:1
+  |
+3 | / #[seo(
+4 | |   meta( title = "Test")
+5 | | )]
+  | |__^
+  |
+  = note: this error originates in the attribute macro `seo` (in Nightly builds, run with -Z macro-backtrace for more info)

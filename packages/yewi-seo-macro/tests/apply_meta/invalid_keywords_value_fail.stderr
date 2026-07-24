@@ -1,0 +1,5 @@
+error: expected string literal
+ --> tests/apply_meta/invalid_keywords_value_fail.rs:7:16
+  |
+7 |     keywords = ("comp", "test")
+  |                ^

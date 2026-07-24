@@ -1,0 +1,5 @@
+error: Invalid card type: random_value
+ --> tests/apply_twitter_card/invalid_card_value_fail.rs:7:12
+  |
+7 |     card = "random_value"
+  |            ^^^^^^^^^^^^^^
