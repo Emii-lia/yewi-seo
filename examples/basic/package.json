@@ -1,0 +1,13 @@
+{
+  "name": "basic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx sass ./src/styles/main.scss ./dist/main.css && npx tailwindcss -i ./dist/main.css -o ./src/styles/global.css --minify",
+    "start": "trunk serve"
+  },
+  "dependencies": {
+    "tailwindcss": "^3.4.19"
+  }
+}
