@@ -69,9 +69,11 @@ Every field is optional — include only the sections and keys you need.
 
 ```rust
 #[seo(
-    icon(href = "/favicon-32.png", sizes = "32x32", rel = "icon"),
-    icon(href = "/favicon-16.png", sizes = "16x16", rel = "icon"),
-    icon(href = "/apple-touch-icon.png", sizes = "180x180", rel = "apple-touch-icon"),
+    icon(
+      (href = "/favicon-32.png", sizes = "32x32", rel = "icon"),
+      (href = "/favicon-16.png", sizes = "16x16", rel = "icon"),
+      (href = "/apple-touch-icon.png", sizes = "180x180", rel = "apple-touch-icon")
+    )
 )]
 #[component(App)]
 fn app() -> Html { html! {} }
@@ -99,7 +101,7 @@ If you need SEO tags applied outside of the macro (e.g. conditionally, or from n
 
 ```rust
 use yewi_seo::{apply_seo_meta, SeoMetaProps};
- 
+
 apply_seo_meta(SeoMetaProps {
     title: Some("Custom title".to_string()),
     ..Default::default()
