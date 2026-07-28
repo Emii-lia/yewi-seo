@@ -1,0 +1,34 @@
+name: Rust
+
+on:
+  push:
+    branches: [ "master" ]
+    paths-ignore:
+      - '.github/workflows/**'
+      - 'LICENSE'
+      - '*.md'
+      - '.gitignore'
+      - 'packages/yewi-seo/*.md'
+      - 'packages/yewi-seo-macro/*.md'
+  pull_request:
+    branches: [ "master" ]
+    paths-ignore:
+      - 'LICENSE'
+      - '*.md'
+      - '.gitignore'
+      - 'packages/yewi-seo/*.md'
+      - 'packages/yewi-seo-macro/*.md'
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: cargo build --verbose
+      - name: Run tests
+        run: cargo test -p yewi-seo-macro --verbose
