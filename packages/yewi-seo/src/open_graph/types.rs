@@ -86,8 +86,8 @@ pub struct OpenGraphProps {
   pub title: Option<String>,
   pub description: Option<String>,
   pub image: Option<String>,
-  pub image_width: Option<u32>,
-  pub image_height: Option<u32>,
+  pub image_width: Option<String>,
+  pub image_height: Option<String>,
   pub image_alt: Option<String>,
   pub image_type: Option<String>,
   pub image_secure_url: Option<String>,
@@ -113,16 +113,15 @@ impl ObjToIter for OpenGraphProps {
     let alternate_locales =       self.alternate_locale.map(|locales| {
       locales
         .into_iter()
-        .enumerate()
-        .map(|(i, locale)| (format!("locale:alternate:{}", i), Some(locale)))
+        .map(|locale| ("locale:alternate".to_string(), Some(locale)))
         .collect::<Vec<(String, Option<String>)>>()
     });
     let mut og_vec = vec![
       ("title".to_string(), self.title),
       ("description".to_string(), self.description),
       ("image".to_string(), self.image),
-      ("image:width".to_string(), self.image_width.map(|w| w.to_string())),
-      ("image:height".to_string(), self.image_height.map(|h| h.to_string())),
+      ("image:width".to_string(), self.image_width),
+      ("image:height".to_string(), self.image_height),
       ("image:alt".to_string(), self.image_alt),
       ("image:type".to_string(), self.image_type),
       ("image:secure_url".to_string(), self.image_secure_url),

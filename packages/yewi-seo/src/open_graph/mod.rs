@@ -10,7 +10,12 @@ pub fn apply_open_graph(props: OpenGraphProps) {
 
   for (attr, value) in props.to_iter() {
     let Some(value) = value else { continue };
-    let selector = format!("meta[property='og:{}']", attr);
-    upsert_tag(&doc, "meta", &selector, &[("property", &format!("og:{}", attr)), ("content", &value)])
+    let selector =
+      if attr == "locale:alternate" {
+        format!("meta[property='og:{}',content={}]", attr, value)
+      } else {
+        format!("meta[property='og:{}']", attr)
+      };
+    upsert_tag(&doc, "meta", &selector, &[("property", &format!("og:{}", attr)), ("content", &value)], None)
   }
 }
