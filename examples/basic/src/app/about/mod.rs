@@ -3,9 +3,7 @@ use yewi_seo::{apply_icon, apply_link, apply_meta, apply_open_graph, apply_twitt
 
 #[component(About)]
 pub(crate) fn about() -> Html {
-  apply_icon!(
-    (rel = "icon", href = "https://githubusercontent.com/u/97010292?v=4")
-  );
+  apply_icon!(rel = "icon", href = "/favicon.ico");
   apply_twitter_card!(
     card = "summary_large_image",
     site = "@Emii_lia",
@@ -20,7 +18,7 @@ pub(crate) fn about() -> Html {
   apply_meta!(
     title = "About - Yewi",
     description = "About page of Yewi",
-    keywords = "yew, yewi, about, page",
+    keywords("yew", "yewi", "about", "page"),
   );
   apply_open_graph!(
     title = "About - Yewi",
