@@ -51,7 +51,11 @@ impl Parse for SeoArgs {
         input.parse::<kw::icon>()?;
         let content;
         parenthesized!(content in input);
-        let entries = content.parse_terminated(IconEntry::parse, Token![,])?;
+        let entries = content.parse_terminated(|p| {
+          let p_content;
+          parenthesized!(p_content in p);
+          p_content.parse::<IconEntry>()
+        }, Token![,])?;
         icon = Some(entries.into_iter().collect());
       } else {
         return Err(lookahead.error());
@@ -99,48 +103,4 @@ mod kw {
   custom_keyword!(twitter);
   custom_keyword!(link);
   custom_keyword!(icon);
-  custom_keyword!(title);
-  custom_keyword!(description);
-  custom_keyword!(application_name);
-  custom_keyword!(author);
-  custom_keyword!(generator);
-  custom_keyword!(keywords);
-  custom_keyword!(referrer);
-  custom_keyword!(creator);
-  custom_keyword!(publisher);
-  custom_keyword!(robots);
-  custom_keyword!(theme_color);
-  custom_keyword!(viewport);
-  custom_keyword!(abstract_);
-  custom_keyword!(category);
-  custom_keyword!(classification);
-  custom_keyword!(manifest);
-  custom_keyword!(canonical);
-  custom_keyword!(image);
-  custom_keyword!(image_width);
-  custom_keyword!(image_height);
-  custom_keyword!(image_alt);
-  custom_keyword!(image_type);
-  custom_keyword!(image_secure_url);
-  custom_keyword!(url);
-  custom_keyword!(site_name);
-  custom_keyword!(locale);
-  custom_keyword!(alternate_locale);
-  custom_keyword!(audio);
-  custom_keyword!(audio_secure_url);
-  custom_keyword!(audio_type);
-  custom_keyword!(type_);
-  custom_keyword!(video);
-  custom_keyword!(video_width);
-  custom_keyword!(video_height);
-  custom_keyword!(video_type);
-  custom_keyword!(video_secure_url);
-  custom_keyword!(country_name);
-  custom_keyword!(determiner);
-  custom_keyword!(card);
-  custom_keyword!(site);
-  custom_keyword!(href);
-  custom_keyword!(sizes);
-  custom_keyword!(rel);
-  custom_keyword!(color);
 }

@@ -1,6 +1,5 @@
-use proc_macro2::Ident;
 use quote::quote;
-use syn::{parenthesized, Error, LitStr, Token};
+use syn::{LitStr, Token};
 use syn::parse::{Parse, ParseStream};
 use crate::seo::types::option_litstr_tokens;
 
@@ -14,8 +13,6 @@ pub struct IconEntry {
 
 impl Parse for IconEntry {
   fn parse(input: ParseStream) -> syn::Result<Self> {
-    let content;
-    parenthesized!(content in input);
 
     let mut href = None;
     let mut sizes = None;
@@ -23,21 +20,34 @@ impl Parse for IconEntry {
     let mut rel = None;
     let mut color = None;
 
-    let entries = content.parse_terminated(|input| -> syn::Result<(Ident, LitStr)> {
-      let key: Ident = input.parse()?;
-      input.parse::<Token![=]>()?;
-      let value: LitStr = input.parse()?;
-      Ok((key, value))
-    }, Token![,], )?;
+    while !input.is_empty() {
+      let lookahead = input.lookahead1();
+      if lookahead.peek(kw::href) {
+        input.parse::<kw::href>()?;
+        input.parse::<Token![=]>()?;
+        href = input.parse()?;
+      } else if lookahead.peek(kw::sizes) {
+        input.parse::<kw::sizes>()?;
+        input.parse::<Token![=]>()?;
+        sizes = Some(input.parse()?);
+      } else if lookahead.peek(kw::type_) {
+        input.parse::<kw::type_>()?;
+        input.parse::<Token![=]>()?;
+        type_ = Some(input.parse()?);
+      } else if lookahead.peek(kw::rel) {
+        input.parse::<kw::rel>()?;
+        input.parse::<Token![=]>()?;
+        rel = Some(input.parse()?);
+      } else if lookahead.peek(kw::color) {
+        input.parse::<kw::color>()?;
+        input.parse::<Token![=]>()?;
+        color = Some(input.parse()?);
+      } else {
+        return Err(lookahead.error());
+      }
 
-    for (key, value) in entries {
-      match key.to_string().as_str() {
-        "href" => href = Some(value),
-        "sizes" => sizes = Some(value),
-        "type" => type_ = Some(value),
-        "rel" => rel = Some(value),
-        "color" => color = Some(value),
-        rest => return Err(Error::new(key.span(), format!("Invalid key: {}", rest))),
+      if input.peek(Token![,]) {
+        input.parse::<Token![,]>()?;
       }
     }
 
@@ -95,4 +105,14 @@ impl IconEntry {
         })
     }
   }
+}
+
+mod kw {
+  use syn::custom_keyword;
+
+  custom_keyword!(href);
+  custom_keyword!(rel);
+  custom_keyword!(sizes);
+  custom_keyword!(type_);
+  custom_keyword!(color);
 }
