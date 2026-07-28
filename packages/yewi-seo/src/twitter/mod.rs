@@ -13,6 +13,6 @@ pub fn apply_twitter_card(props: TwitterCardProps) {
 
     let selector = format!("meta[name='twitter:{}']", attr);
 
-    upsert_tag(&doc, "meta", &selector, &[("name", &format!("twitter:{}", attr)), ("content", &value)])
+    upsert_tag(&doc, "meta", &selector, &[("name", &format!("twitter:{}", attr)), ("content", &value)], None)
   }
 }

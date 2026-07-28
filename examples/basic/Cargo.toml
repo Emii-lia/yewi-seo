@@ -11,4 +11,4 @@ yew-router = "0.20.0"
 web-sys = { version = "0.3.83", features = ["DataTransfer"] }
 gloo = "0.12.0"
 yew_icons = { version = "0.10.0", features = ["lucide"] }
-yewi-seo = { path = "../../packages/yewi-seo"}
+yewi-seo = { version = "0.1.1", path = "../../packages/yewi-seo" }

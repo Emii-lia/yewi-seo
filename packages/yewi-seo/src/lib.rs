@@ -64,9 +64,7 @@
 //!
 //! #[component(About)]
 //! pub(crate) fn about() -> Html {
-//!   apply_icon!(
-//!     (rel = "icon", href = "/favicon.ico")
-//!   );
+//!   apply_icon!(rel = "icon", href = "/favicon.ico");
 //!   apply_twitter_card!(
 //!     card = "summary_large_image",
 //!     site = "@Emii_lia",

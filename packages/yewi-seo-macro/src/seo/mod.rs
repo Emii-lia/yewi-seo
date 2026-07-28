@@ -10,7 +10,10 @@ pub fn seo_impl(args: SeoArgs, item: ItemFn) -> syn::Result<TokenStream> {
   let ItemFn { attrs, vis, sig, block, modifiers: _modifiers } = item;
   let fn_name = &sig.ident;
 
-  if !attrs.iter().any(|attr: &Attribute| attr.path().is_ident("component")) {
+  if !attrs.iter().any(|attr: &Attribute|
+    attr.path().is_ident("component")
+    || attr.path().is_ident("function_component")
+  ) {
     return Err(syn::Error::new(
       proc_macro2::Span::call_site()
       ,"#[seo(...)] must be placed above #[component(...)], e.g.:\n\

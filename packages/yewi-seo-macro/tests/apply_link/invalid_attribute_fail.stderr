@@ -1,4 +1,4 @@
-error: Invalid key: x
+error: expected one of: `author`, `manifest`, `canonical`
  --> tests/apply_link/invalid_attribute_fail.rs:6:16
   |
 6 |   apply_link!( x = "value" );

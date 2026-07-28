@@ -1,6 +1,5 @@
-use proc_macro2::Ident;
 use quote::quote;
-use syn::{Error, LitStr};
+use syn::{parenthesized, LitStr, Token};
 use syn::parse::{Parse, ParseStream};
 use crate::seo::types::option_litstr_tokens;
 
@@ -39,32 +38,89 @@ impl Parse for MetaEntry {
     let mut abstract_ = None;
     let mut category = None;
     let mut classification = None;
-
-    let entries = input.parse_terminated(|inp| -> syn::Result<(Ident, LitStr)> {
-      let key: Ident = inp.parse()?;
-      inp.parse::<syn::Token![=]>()?;
-      let value: LitStr = inp.parse()?;
-      Ok((key, value))
-    }, syn::Token![,])?;
-
-    for (key, value) in entries {
-      match key.to_string().as_str() {
-        "title" => title = Some(value),
-        "description" => description = Some(value),
-        "application-name" => application_name = Some(value),
-        "author" => author = Some(value),
-        "generator" => generator = Some(value),
-        "keywords" => keywords = Some(vec![value]),
-        "referrer" => referrer = Some(value),
-        "creator" => creator = Some(value),
-        "publisher" => publisher = Some(value),
-        "robots" => robots = Some(value),
-        "theme_color" => theme_color = Some(value),
-        "viewport" => viewport = Some(value),
-        "abstract_" => abstract_ = Some(value),
-        "category" => category = Some(value),
-        "classification" => classification = Some(value),
-        rest => return Err(Error::new(key.span(), format!("Invalid key: {}", rest)))
+    
+    while !input.is_empty() {
+      let lookahead = input.lookahead1();
+      if lookahead.peek(kw::title) {
+        input.parse::<kw::title>()?;
+        input.parse::<Token![=]>()?;
+        title = Some(input.parse()?);
+      } else if lookahead.peek(kw::description) {
+        input.parse::<kw::description>()?;
+        input.parse::<Token![=]>()?;
+        description = Some(input.parse()?);
+      } else if lookahead.peek(kw::application_name) {
+        input.parse::<kw::application_name>()?;
+        input.parse::<Token![=]>()?;
+        application_name = Some(input.parse()?);
+      } else if lookahead.peek(kw::author) {
+        input.parse::<kw::author>()?;
+        input.parse::<Token![=]>()?;
+        author = Some(input.parse()?);
+      } else if lookahead.peek(kw::generator) {
+        input.parse::<kw::generator>()?;
+        input.parse::<Token![=]>()?;
+        generator = Some(input.parse()?);
+      } else if lookahead.peek(kw::keywords) {
+        input.parse::<kw::keywords>()?;
+        if input.peek(Token![=]) {
+          input.parse::<Token![=]>()?;
+          let keys = input.parse::<LitStr>()?;
+          keywords = Some(keys.value().split(',').map(|s| LitStr::new(s.trim(), keys.span())).collect());
+        } else {
+          let content;
+          parenthesized!(content in input);
+          let mut keys = Vec::new();
+          while !content.is_empty() {
+            let key: LitStr = content.parse()?;
+            keys.push(key);
+            if content.peek(Token![,]) {
+              content.parse::<Token![,]>()?;
+            }
+          }
+          keywords = Some(keys);
+        }
+      } else if lookahead.peek(kw::referrer) {
+        input.parse::<kw::referrer>()?;
+        input.parse::<Token![=]>()?;
+        referrer = Some(input.parse()?);
+      } else if lookahead.peek(kw::creator) {
+        input.parse::<kw::creator>()?;
+        input.parse::<Token![=]>()?;
+        creator = Some(input.parse()?);
+      } else if lookahead.peek(kw::publisher) {
+        input.parse::<kw::publisher>()?;
+        input.parse::<Token![=]>()?;
+        publisher = Some(input.parse()?);
+      } else if lookahead.peek(kw::robots) {
+        input.parse::<kw::robots>()?;
+        input.parse::<Token![=]>()?;
+        robots = Some(input.parse()?);
+      } else if lookahead.peek(kw::theme_color) {
+        input.parse::<kw::theme_color>()?;
+        input.parse::<Token![=]>()?;
+        theme_color = Some(input.parse()?);
+      } else if lookahead.peek(kw::viewport) {
+        input.parse::<kw::viewport>()?;
+        input.parse::<Token![=]>()?;
+        viewport = Some(input.parse()?);
+      } else if lookahead.peek(kw::abstract_) {
+        input.parse::<kw::abstract_>()?;
+        input.parse::<Token![=]>()?;
+        abstract_ = Some(input.parse()?);
+      } else if lookahead.peek(kw::category) {
+        input.parse::<kw::category>()?;
+        input.parse::<Token![=]>()?;
+        category = Some(input.parse()?);
+      } else if lookahead.peek(kw::classification) {
+        input.parse::<kw::classification>()?;
+        input.parse::<Token![=]>()?;
+        classification = Some(input.parse()?);
+      } else {
+        return Err(lookahead.error());
+      }
+      if input.peek(Token![,]) {
+        input.parse::<Token![,]>()?;
       }
     }
     
@@ -132,4 +188,24 @@ impl MetaEntry {
         })
     }
   }
+}
+
+mod kw {
+  use syn::custom_keyword;
+
+  custom_keyword!(title);
+  custom_keyword!(description);
+  custom_keyword!(application_name);
+  custom_keyword!(author);
+  custom_keyword!(generator);
+  custom_keyword!(keywords);
+  custom_keyword!(referrer);
+  custom_keyword!(creator);
+  custom_keyword!(publisher);
+  custom_keyword!(robots);
+  custom_keyword!(theme_color);
+  custom_keyword!(viewport);
+  custom_keyword!(abstract_);
+  custom_keyword!(category);
+  custom_keyword!(classification);
 }

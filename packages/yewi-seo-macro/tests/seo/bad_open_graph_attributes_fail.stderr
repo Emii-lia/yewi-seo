@@ -10,7 +10,7 @@ error: expected parentheses
 17 |   open_graph = "Hello Yewi"
    |              ^
 
-error: Invalid key: x
+error: expected one of: `title`, `description`, `image`, `url`, `type_`, `site_name`, `locale`, `alternate_locale`, `audio`, `video`, `country_name`, `determiner`
   --> tests/seo/bad_open_graph_attributes_fail.rs:29:15
    |
 29 |   open_graph( x = "Hello Yewi" )

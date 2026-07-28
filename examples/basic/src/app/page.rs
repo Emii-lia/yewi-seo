@@ -5,7 +5,7 @@ use yewi_seo::seo;
   meta(
     title = "Yewi",
     description = "Component-driven UI kit for Yew",
-    keywords = "yew, yewi, yew-component, tailwind, scss, component-driven, ui, kit",
+    keywords("yew", "yewi", "yew-component", "tailwind", "scss", "component-driven", "ui", "kit"),
   ),
   open_graph(
     title = "Yewi",
@@ -27,11 +27,10 @@ use yewi_seo::seo;
     image = "https://yewi.fiaro.app/og-image.png",
   ),
   icon(
-    ( rel = "icon", href = "https://avatars.githubusercontent.com/u/97010292?v=4" )
+    ( rel = "icon", href = "/favicon.ico" ),
   )
 )]
 #[component(Home)]
-
 pub(crate) fn home() -> Html {
   html! {
     <div class="Home">

@@ -12,6 +12,6 @@ pub fn apply_link(props: types::LinkProps) {
     
     let selector = format!("link[rel='{}']", attr);
     
-    upsert_tag(&doc, "link", &selector, &[("rel", &attr), ("href", &value)])
+    upsert_tag(&doc, "link", &selector, &[("rel", &attr), ("href", &value)], None);
   }
 }

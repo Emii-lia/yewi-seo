@@ -1,7 +1,7 @@
-error: unexpected end of input, expected parentheses
+error: proc macro panicked
  --> tests/apply_icon/without_attribute_fail.rs:6:3
   |
 6 |   apply_icon!();
   |   ^^^^^^^^^^^^^
   |
-  = note: this error originates in the macro `apply_icon` (in Nightly builds, run with -Z macro-backtrace for more info)
+  = help: message: called `Option::unwrap()` on a `None` value

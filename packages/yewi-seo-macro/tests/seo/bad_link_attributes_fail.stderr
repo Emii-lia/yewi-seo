@@ -10,7 +10,7 @@ error: expected parentheses
 17 |   link = "https://yewi.fiaro.app"
    |        ^
 
-error: Invalid key: x
+error: expected one of: `author`, `manifest`, `canonical`
   --> tests/seo/bad_link_attributes_fail.rs:29:9
    |
 29 |   link( x = "https://yewi.fiaro.app" )
@@ -28,11 +28,11 @@ error: expected string literal
 53 |   link( canonical = ( default = "https://yewi.fiaro.app" ) )
    |                     ^
 
-error: expected `=`
-  --> tests/seo/bad_link_attributes_fail.rs:65:13
+error: expected one of: `author`, `manifest`, `canonical`
+  --> tests/seo/bad_link_attributes_fail.rs:65:9
    |
 65 |   link( icon( href = "/favicon.ico", rel = "icon" ) )
-   |             ^
+   |         ^^^^
 
 warning: unused import: `yew::prelude::*`
  --> tests/seo/bad_link_attributes_fail.rs:1:5

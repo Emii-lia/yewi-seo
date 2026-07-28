@@ -10,23 +10,23 @@ error: expected parentheses
 17 |   meta = "hello"
    |        ^
 
-error: Invalid key: x
+error: expected one of: `title`, `description`, `application_name`, `author`, `generator`, `keywords`, `referrer`, `creator`, `publisher`, `robots`, `theme_color`, `viewport`, `abstract_`, `category`, `classification`
   --> tests/seo/bad_meta_attributes_fail.rs:29:9
    |
 29 |   meta( x = "hello" )
    |         ^
 
-error: expected `=`
-  --> tests/seo/bad_meta_attributes_fail.rs:41:19
+error: expected one of: `title`, `description`, `application_name`, `author`, `generator`, `keywords`, `referrer`, `creator`, `publisher`, `robots`, `theme_color`, `viewport`, `abstract_`, `category`, `classification`
+  --> tests/seo/bad_meta_attributes_fail.rs:41:9
    |
 41 |   meta( open_graph( title = "Open Graph title" ) )
-   |                   ^
+   |         ^^^^^^^^^^
 
-error: expected `=`
-  --> tests/seo/bad_meta_attributes_fail.rs:53:16
+error: expected one of: `title`, `description`, `application_name`, `author`, `generator`, `keywords`, `referrer`, `creator`, `publisher`, `robots`, `theme_color`, `viewport`, `abstract_`, `category`, `classification`
+  --> tests/seo/bad_meta_attributes_fail.rs:53:9
    |
 53 |   meta( twitter( title = "Twitter title" ) )
-   |                ^
+   |         ^^^^^^^
 
 error: expected `=`
   --> tests/seo/bad_meta_attributes_fail.rs:65:14
