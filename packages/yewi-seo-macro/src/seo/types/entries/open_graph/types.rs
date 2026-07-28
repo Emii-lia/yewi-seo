@@ -80,7 +80,7 @@ impl Parse for OgVideoEntry {
           width = Some(input.parse()?);
         } else if input.peek(LitInt) {
           let int: LitInt = input.parse()?;
-          width = Some(LitStr::new(&int.base10_digits(), int.span()));
+          width = Some(LitStr::new(int.base10_digits(), int.span()));
         } else {
           return Err(syn::Error::new(input.span(), "Expected a string or integer literal for width"));
         }
@@ -89,7 +89,7 @@ impl Parse for OgVideoEntry {
         input.parse::<Token![=]>()?;
         if input.peek(LitInt) {
           let int: LitInt = input.parse()?;
-          height = Some(LitStr::new(&int.base10_digits(), int.span()));
+          height = Some(LitStr::new(int.base10_digits(), int.span()));
         } else if input.peek(LitStr) {
           height = Some(input.parse()?);
         } else {
@@ -153,7 +153,7 @@ impl Parse for OgImageEntry {
           width = Some(input.parse()?);
         } else if input.peek(LitInt) {
           let int: LitInt = input.parse()?;
-          width = Some(LitStr::new(&int.base10_digits(), int.span()));
+          width = Some(LitStr::new(int.base10_digits(), int.span()));
         } else {
           return Err(syn::Error::new(input.span(), "Expected a string or integer literal for width"));
         }
@@ -164,7 +164,7 @@ impl Parse for OgImageEntry {
           height = Some(input.parse()?);
         } else if input.peek(LitInt) {
           let int: LitInt = input.parse()?;
-          height = Some(LitStr::new(&int.base10_digits(), int.span()));
+          height = Some(LitStr::new(int.base10_digits(), int.span()));
         } else {
           return Err(syn::Error::new(input.span(), "Expected a string literal for height"));
         }

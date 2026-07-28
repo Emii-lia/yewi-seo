@@ -192,7 +192,6 @@ pub fn seo(attr: TokenStream, item: TokenStream) -> TokenStream {
 
     seo_impl(args, item_fn)
       .unwrap_or_else(|err| TokenStream::from(err.to_compile_error()))
-      .into()
 }
 
 /// # apply_meta!();

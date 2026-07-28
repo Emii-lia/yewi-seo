@@ -9,7 +9,7 @@ pub fn apply_seo_meta(props: SeoMetaProps) {
   let Some(doc) = window().and_then(|w| w.document()) else {  return };
 
   if let Some(title) = &props.title {
-    doc.set_title(&title);
+    doc.set_title(title);
   }
 
   for (attr, value) in props.to_iter() {

@@ -72,9 +72,9 @@ impl Parse for TwitterEntry {
         input.parse::<syn::Token![,]>()?;
       }
     }
-    
-    if card.is_some() && TwitterCardType::from(card.as_ref().unwrap().value()).is_none() {
-      return Err(Error::new(card.as_ref().unwrap().span(), format!("Invalid card type: {}", card.as_ref().unwrap().value())));
+
+    if let Some(card) = card.clone() && TwitterCardType::from(card.value()).is_none() {
+      return Err(Error::new(card.span(), format!("Invalid card type: {}", card.value())));
     }
 
     Ok(Self {
@@ -95,11 +95,11 @@ impl TwitterEntry {
     let creator = option_litstr_tokens(self.creator.as_ref());
     let title = option_litstr_tokens(self.title.as_ref());
     let description = option_litstr_tokens(self.description.as_ref());
-    let image = option_litstr_tokens(self.image.as_ref().map(|image| image.url.as_ref()).flatten());
-    let image_alt = option_litstr_tokens(self.image.as_ref().map(|image| image.alt.as_ref()).flatten());
-    let image_width = option_litstr_tokens(self.image.as_ref().map(|image| image.width.as_ref()).flatten());
-    let image_height = option_litstr_tokens(self.image.as_ref().map(|image| image.height.as_ref()).flatten());
-    let image_type = option_litstr_tokens(self.image.as_ref().map(|image| image.type_.as_ref()).flatten());
+    let image = option_litstr_tokens(self.image.as_ref().and_then(|image| image.url.as_ref()));
+    let image_alt = option_litstr_tokens(self.image.as_ref().and_then(|image| image.alt.as_ref()));
+    let image_width = option_litstr_tokens(self.image.as_ref().and_then(|image| image.width.as_ref()));
+    let image_height = option_litstr_tokens(self.image.as_ref().and_then(|image| image.height.as_ref()));
+    let image_type = option_litstr_tokens(self.image.as_ref().and_then(|image| image.type_.as_ref()));
 
     quote! {
         ::yewi_seo::apply_seo_twitter_card(::yewi_seo::TwitterCardProps {
