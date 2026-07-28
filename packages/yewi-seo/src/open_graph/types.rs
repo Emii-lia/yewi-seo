@@ -1,3 +1,4 @@
+use std::fmt::{Display, Formatter};
 use crate::traits::ObjToIter;
 
 #[derive(Debug, Clone)]
@@ -34,49 +35,49 @@ pub enum OpenGraphDeterminer {
   None,
 }
 
-impl MusicType {
-  pub fn to_string(self) -> String {
+impl Display for MusicType {
+  fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
     match self {
-      MusicType::Song => "music.song".to_string(),
-      MusicType::Album => "music.album".to_string(),
-      MusicType::Playlist => "music.playlist".to_string(),
-      MusicType::RadioStation => "music.radio_station".to_string(),
+      MusicType::Song => write!(f, "music.song"),
+      MusicType::Album => write!(f, "music.album"),
+      MusicType::Playlist => write!(f, "music.playlist"),
+      MusicType::RadioStation => write!(f, "music.radio_station"),
     }
   }
 }
 
-impl VideoType {
-  pub fn to_string(self) -> String {
+impl Display for VideoType {
+  fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
     match self {
-      VideoType::TvShow => "video.tv_show".to_string(),
-      VideoType::Other => "video.other".to_string(),
-      VideoType::Movie => "video.movie".to_string(),
-      VideoType::Episode => "video.episode".to_string(),
+      VideoType::TvShow => write!(f, "video.tv_show"),
+      VideoType::Other => write!(f, "video.other"),
+      VideoType::Movie => write!(f, "video.movie"),
+      VideoType::Episode => write!(f, "video.episode")
     }
   }
 }
 
-impl OpenGraphDeterminer {
-  pub fn to_string(self) -> String {
+impl Display for  OpenGraphDeterminer {
+  fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
     match self {
-      OpenGraphDeterminer::An => "an".to_string(),
-      OpenGraphDeterminer::A => "a".to_string(),
-      OpenGraphDeterminer::The => "the".to_string(),
-      OpenGraphDeterminer::Auto => "auto".to_string(),
-      OpenGraphDeterminer::None => "".to_string(),
+      OpenGraphDeterminer::An => write!(f, "an"),
+      OpenGraphDeterminer::A => write!(f, "a"),
+      OpenGraphDeterminer::The => write!(f, "the"),
+      OpenGraphDeterminer::Auto => write!(f, "auto"),
+      OpenGraphDeterminer::None => write!(f, ""),
     }
   }
 }
 
-impl OpenGraphType {
-  pub fn to_string(self) -> String {
+impl Display for OpenGraphType {
+  fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
     match self {
-      OpenGraphType::Article => "article".to_string(),
-      OpenGraphType::Book => "book".to_string(),
-      OpenGraphType::Profile => "profile".to_string(),
-      OpenGraphType::Website => "website".to_string(),
-      OpenGraphType::Video(video_type) => video_type.to_string(),
-      OpenGraphType::Music(music_type) => music_type.to_string(),
+      OpenGraphType::Article => write!(f, "article"),
+      OpenGraphType::Book => write!(f, "book"),
+      OpenGraphType::Profile => write!(f, "profile"),
+      OpenGraphType::Website => write!(f, "website"),
+      OpenGraphType::Video(video_type) => write!(f, "{}", video_type),
+      OpenGraphType::Music(music_type) => write!(f, "{}", music_type),
     }
   }
 }

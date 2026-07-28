@@ -1,3 +1,4 @@
+use std::fmt::{Display, Formatter};
 use crate::traits::ObjToIter;
 
 #[derive(Debug, Clone)]
@@ -10,15 +11,15 @@ pub enum ReferrerPolicy {
   StrictOriginWhenCrossOrigin,
 }
 
-impl ReferrerPolicy {
-  pub fn to_string(self) -> String {
+impl Display for ReferrerPolicy {
+  fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
     match self {
-      ReferrerPolicy::NoReferrer => "no-referrer".to_string(),
-      ReferrerPolicy::NoReferrerWhenDowngrade => "no-referrer-when-downgrade".to_string(),
-      ReferrerPolicy::Origin => "origin".to_string(),
-      ReferrerPolicy::OriginWhenCrossOrigin => "origin-when-cross-origin".to_string(),
-      ReferrerPolicy::SameOrigin => "same-origin".to_string(),
-      ReferrerPolicy::StrictOriginWhenCrossOrigin => "strict-origin-when-cross-origin".to_string(),
+      ReferrerPolicy::NoReferrer => write!(f, "no-referrer"),
+      ReferrerPolicy::NoReferrerWhenDowngrade => write!(f, "no-referrer-when-downgrade"),
+      ReferrerPolicy::Origin => write!(f, "origin"),
+      ReferrerPolicy::OriginWhenCrossOrigin => write!(f, "origin-when-cross-origin"),
+      ReferrerPolicy::SameOrigin => write!(f, "same-origin"),
+      ReferrerPolicy::StrictOriginWhenCrossOrigin => write!(f, "strict-origin-when-cross-origin")
     }
   }
 }

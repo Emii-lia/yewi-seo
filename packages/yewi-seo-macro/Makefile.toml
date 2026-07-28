@@ -1,0 +1,8 @@
+[tasks.test]
+clear = true
+command = "cargo"
+args = ["test", "${@}"]
+
+[tasks.test-overwrite]
+extend = "test"
+env = { TRYBUILD = "overwrite"}

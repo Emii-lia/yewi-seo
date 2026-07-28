@@ -1,34 +1,66 @@
-name: Rust
+name: CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
     paths-ignore:
-      - '.github/workflows/**'
-      - 'LICENSE'
-      - '*.md'
-      - '.gitignore'
-      - 'packages/yewi-seo/*.md'
-      - 'packages/yewi-seo-macro/*.md'
+      - "LICENSE"
+      - "*.md"
+      - ".gitignore"
+      - "packages/yewi-seo/*.md"
+      - "packages/yewi-seo-macro/*.md"
   pull_request:
-    branches: [ "master" ]
+    branches: ["master"]
     paths-ignore:
-      - 'LICENSE'
-      - '*.md'
-      - '.gitignore'
-      - 'packages/yewi-seo/*.md'
-      - 'packages/yewi-seo-macro/*.md'
+      - "LICENSE"
+      - "*.md"
+      - ".gitignore"
+      - "packages/yewi-seo/*.md"
+      - "packages/yewi-seo-macro/*.md"
+
 env:
   CARGO_TERM_COLOR: always
+  RUSTFLAGS: -Dwarnings
 
 jobs:
-  build:
-
+  check:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
-      - name: Build
-        run: cargo build --verbose
-      - name: Run tests
+      - uses: actions/checkout@v7
+      - name: Install Rust toolchain
+        run: rustup show
+      - name: cargo check
+        run: cargo check --workspace --exclude basic
+
+  clippy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install Rust toolchain
+        run: |
+          rustup show
+          rustup component add clippy
+      - name: cargo clippy
+        run: cargo clippy --workspace --exclude basic -- --deny=warnings
+
+  test:
+    runs-on: ubuntu-latest
+    needs: check
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install Rust toolchain
+        run: rustup show
+      - name: test (macro)
         run: cargo test -p yewi-seo-macro --verbose
+      - name: test (lib — doc)
+        run: cargo test -p yewi-seo --doc --verbose
+
+  build:
+    runs-on: ubuntu-latest
+    needs: [check, clippy, test]
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install Rust toolchain
+        run: rustup show
+      - name: Build
+        run: cargo build --workspace --exclude basic --verbose

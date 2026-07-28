@@ -85,7 +85,7 @@ impl Parse for OpenGraphEntry {
         let content;
         parenthesized!(content in input);
         alternate_locale = Some(content.parse_terminated(|lc| -> syn::Result<LitStr> {
-          Ok(lc.parse::<LitStr>()?)
+          lc.parse::<LitStr>()
         }, Token![,])?.into_iter().collect());
       } else if lookahead.peek(kw::audio) {
         input.parse::<kw::audio>()?;
@@ -136,25 +136,25 @@ impl OpenGraphEntry {
   pub fn build_open_graph_tokens(&self) -> proc_macro2::TokenStream {
     let title = option_litstr_tokens(self.title.as_ref());
     let description = option_litstr_tokens(self.description.as_ref());
-    let image = option_litstr_tokens(self.image.as_ref().map(|image_entry| image_entry.url.as_ref()).flatten());
-    let image_width = option_litstr_tokens(self.image.as_ref().map(|img| img.width.as_ref()).flatten());
-    let image_height = option_litstr_tokens(self.image.as_ref().map(|img| img.height.as_ref()).flatten());
-    let image_alt = option_litstr_tokens(self.image.as_ref().map(|img| img.alt.as_ref()).flatten());
-    let image_type = option_litstr_tokens(self.image.as_ref().map(|img| img.type_.as_ref()).flatten());
-    let image_secure_url = option_litstr_tokens(self.image.as_ref().map(|img| img.secure_url.as_ref()).flatten());
+    let image = option_litstr_tokens(self.image.as_ref().and_then(|image_entry| image_entry.url.as_ref()));
+    let image_width = option_litstr_tokens(self.image.as_ref().and_then(|img| img.width.as_ref()));
+    let image_height = option_litstr_tokens(self.image.as_ref().and_then(|img| img.height.as_ref()));
+    let image_alt = option_litstr_tokens(self.image.as_ref().and_then(|img| img.alt.as_ref()));
+    let image_type = option_litstr_tokens(self.image.as_ref().and_then(|img| img.type_.as_ref()));
+    let image_secure_url = option_litstr_tokens(self.image.as_ref().and_then(|img| img.secure_url.as_ref()));
     let url = option_litstr_tokens(self.url.as_ref());
     let type_ = option_litstr_tokens(self.type_.as_ref());
     let site_name = option_litstr_tokens(self.site_name.as_ref());
     let locale = option_litstr_tokens(self.locale.as_ref());
     let alternate_locale = option_vec_litstr_tokens(self.alternate_locale.as_ref());
-    let audio = option_litstr_tokens(self.audio.as_ref().map(|audio_entry| audio_entry.url.as_ref()).flatten());
-    let audio_secure_url = option_litstr_tokens(self.audio.as_ref().map(|audio| audio.secure_url.as_ref()).flatten());
-    let audio_type = option_litstr_tokens(self.audio.as_ref().map(|audio| audio.type_.as_ref()).flatten());
-    let video = option_litstr_tokens(self.video.as_ref().map(|video| video.url.as_ref()).flatten());
-    let video_width = option_litstr_tokens(self.video.as_ref().map(|video| video.width.as_ref()).flatten());
-    let video_height = option_litstr_tokens(self.video.as_ref().map(|video| video.height.as_ref()).flatten());
-    let video_type = option_litstr_tokens(self.video.as_ref().map(|video| video.type_.as_ref()).flatten());
-    let video_secure_url = option_litstr_tokens(self.video.as_ref().map(|video| video.secure_url.as_ref()).flatten());
+    let audio = option_litstr_tokens(self.audio.as_ref().and_then(|audio_entry| audio_entry.url.as_ref()));
+    let audio_secure_url = option_litstr_tokens(self.audio.as_ref().and_then(|audio| audio.secure_url.as_ref()));
+    let audio_type = option_litstr_tokens(self.audio.as_ref().and_then(|audio| audio.type_.as_ref()));
+    let video = option_litstr_tokens(self.video.as_ref().and_then(|video| video.url.as_ref()));
+    let video_width = option_litstr_tokens(self.video.as_ref().and_then(|video| video.width.as_ref()));
+    let video_height = option_litstr_tokens(self.video.as_ref().and_then(|video| video.height.as_ref()));
+    let video_type = option_litstr_tokens(self.video.as_ref().and_then(|video| video.type_.as_ref()));
+    let video_secure_url = option_litstr_tokens(self.video.as_ref().and_then(|video| video.secure_url.as_ref()));
     let country_name = option_litstr_tokens(self.country_name.as_ref());
     let determiner = option_litstr_tokens(self.determiner.as_ref());
 

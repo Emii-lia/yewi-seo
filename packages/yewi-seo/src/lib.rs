@@ -8,7 +8,7 @@
 //!
 //! ## Features
 //! - `#[seo(...)]` macro attributes (`meta(...)`, `open_graph(...)`, `twitter(...)`, `link(...)`, `icon(...)`)
-//! placed **above** `#[function_component(...)]`. On mount, it injects a `use_effect_with` hook that writes the requested tags into `document.head`.
+//!   placed **above** `#[function_component(...)]`. On mount, it injects a `use_effect_with` hook that writes the requested tags into `document.head`.
 //! - `apply_meta!(...)`, `apply_open_graph!(...)`, `apply_twitter_card!(...)`, `apply_link!(...)` and `apply_icon!(...)` macros that expand into calls to the corresponding runtime functions.
 //!
 //! ## Examples
