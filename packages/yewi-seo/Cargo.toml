@@ -12,3 +12,6 @@ license = "MIT"
 [dependencies]
 web-sys = { version = "0.3.103", features = [ "Document", "Element", "HtmlHeadElement", "Window"]}
 yewi-seo-macro = { version = "0.1.1" ,path = "../yewi-seo-macro" }
+
+[dev-dependencies]
+yew = "0.23.0"
