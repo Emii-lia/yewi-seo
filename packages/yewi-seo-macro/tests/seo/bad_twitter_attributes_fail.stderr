@@ -10,7 +10,7 @@ error: expected parentheses
 17 |   twitter = "Hello Yewi"
    |           ^
 
-error: Invalid key: x
+error: expected one of: `card`, `site`, `creator`, `title`, `description`, `image`
   --> tests/seo/bad_twitter_attributes_fail.rs:29:12
    |
 29 |   twitter( x = "Hello Yewi" )

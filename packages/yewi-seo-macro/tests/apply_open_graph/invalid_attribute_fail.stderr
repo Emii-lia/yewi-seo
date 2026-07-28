@@ -1,4 +1,4 @@
-error: Invalid key: x
+error: expected one of: `title`, `description`, `image`, `url`, `type_`, `site_name`, `locale`, `alternate_locale`, `audio`, `video`, `country_name`, `determiner`
  --> tests/apply_open_graph/invalid_attribute_fail.rs:6:22
   |
 6 |   apply_open_graph!( x = "value" );

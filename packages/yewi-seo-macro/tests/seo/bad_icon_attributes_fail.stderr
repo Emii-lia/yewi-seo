@@ -10,7 +10,7 @@ error: expected parentheses
 18 |   icon( href = "/favicon.ico", rel = "icon" )
    |         ^^^^
 
-error: Invalid key: x
+error: expected one of: `href`, `sizes`, `type_`, `rel`, `color`
   --> tests/seo/bad_icon_attributes_fail.rs:31:6
    |
 31 |     (x = "icon", href = "/favicon.ico")

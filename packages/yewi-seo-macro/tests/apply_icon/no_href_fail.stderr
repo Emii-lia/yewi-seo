@@ -1,7 +1,7 @@
 error: proc macro panicked
  --> tests/apply_icon/no_href_fail.rs:6:3
   |
-6 |   apply_icon!(( rel = "icon" ));
-  |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+6 |   apply_icon!(rel = "icon" );
+  |   ^^^^^^^^^^^^^^^^^^^^^^^^^^
   |
   = help: message: called `Option::unwrap()` on a `None` value
