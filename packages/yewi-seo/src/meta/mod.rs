@@ -17,6 +17,6 @@ pub fn apply_seo_meta(props: SeoMetaProps) {
     if attr == "title" { continue; }
 
     let selector = format!("meta[name='{}']", attr);
-    upsert_tag(&doc, "meta", &selector, &[("name", &attr), ("content", &value)])
+    upsert_tag(&doc, "meta", &selector, &[("name", &attr), ("content", &value)], None);
   }
 }
