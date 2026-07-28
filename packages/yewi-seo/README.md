@@ -53,13 +53,13 @@ fn pricing_page() -> Html {
 
 ## What it sets
 
-| Section | Covers                                                                                                                                                                        |
-|---|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `meta(...)` | `<title>`, `description`, `application` name, `author`, `generator`, `keywords`, `referrer`, `robots`, `theme-color`, `viewport`, `abstract`, `category`, `classification`    |
-| `open_graph(...)` | `og:title`, `og:description`, `og:image` (+ dimensions/alt/type), `og:url`, `og:type`, `og:site_name`, `og:locale` (+ alternates), `og:audio`, `og:video`, and related fields |
-| `twitter(...)` | Twitter Card tags — `card`, `site`, `creator`, `title`, `description`, `image` (+ alt/dimensions/type)                                                                        |
-| `link(...)` | `<link>` tags : `author`, `manifest`, `canonical`                                                                                                                             |
-| `icon(...)` | One or more `<link rel="icon">`: style entries (`href`, `sizes`, `rel`, `color`)                                                                                              |
+| Section | Covers                                                                                                                                                                     |
+|---|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `meta(...)` | `<title>`, `description`, `application` name, `author`, `generator`, `keywords`, `referrer`, `robots`, `theme-color`, `viewport`, `abstract`, `category`, `classification` |
+| `open_graph(...)` | `title`, `description`, `image` (+ dimensions/alt/type/secure_url), `url`, `type`, `site_name`, `locale` (+ alternates), `audio`, `video`, and related fields              |
+| `twitter(...)` | Twitter Card tags — `card`, `site`, `creator`, `title`, `description`, `image` (+ alt/dimensions/type)                                                                     |
+| `link(...)` | `<link>` tags : `author`, `manifest`, `canonical`                                                                                                                          |
+| `icon(...)` | One or more `<link rel="icon">`: style entries (`href`, `sizes`, `rel`, `color`)                                                                                           |
 
 Every field is optional — include only the sections and keys you need.
 
