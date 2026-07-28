@@ -13,6 +13,11 @@ CARGO_MAKE_WORKSPACE_SKIP_MEMBERS = [
 private = true
 namespace = "core"
 
+[tasks.check]
+command = "cargo"
+args = ["check"]
+workspace = true
+
 [tasks.clippy]
 command = "cargo"
 args = ["clippy", "--", "--deny=warnings"]
