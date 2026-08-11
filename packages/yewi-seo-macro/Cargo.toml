@@ -21,4 +21,4 @@ rustversion.workspace = true
 [dev-dependencies]
 yew = "0.23.0"
 trybuild = { workspace = true }
-yewi-seo = { path = "../yewi-seo" }
+yewi-seo = { path = "../yewi-seo", features = ["apply"] }
