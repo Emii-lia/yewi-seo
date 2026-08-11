@@ -9,7 +9,7 @@ Part of the [`yewi`](https://yewi.fiaro.app) ecosystem.
 ## Installation
 
 ```toml
-yewi-seo = "^0.1"
+yewi-seo = "0.2.0"
 ```
 
 ## Quickstart
@@ -93,7 +93,11 @@ apply_meta!(
 );
 ```
 
-Available directly: `apply_meta`, `apply_open_graph`, `apply_twitter_card`, `apply_link`, `apply_icon`.
+Available by adding `apply` feature: `apply_meta`, `apply_open_graph`, `apply_twitter_card`, `apply_link`, `apply_icon`.
+
+```toml
+yewi-seo = { version = "0.2.0", features = ["apply"] }
+```
 
 ## Using the runtime functions directly
 
