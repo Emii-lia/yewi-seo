@@ -1,3 +1,7 @@
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_imports)]
+
 #[derive(PartialEq, Clone, Debug)]
 pub enum Size {
     Small,
