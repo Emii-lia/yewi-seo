@@ -51,7 +51,7 @@ jobs:
       - name: Install Rust toolchain
         run: rustup show
       - name: test (macro)
-        run: cargo test -p yewi-seo-macro --features apply --verbose
+        run: cargo test -p yewi-seo-macro --verbose
       - name: test (lib — doc)
         run: cargo test -p yewi-seo --doc --features apply --verbose
 
