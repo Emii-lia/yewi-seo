@@ -9,7 +9,7 @@ Part of the [`yewi`](https://yewi.fiaro.app) ecosystem.
 ## Installation
 
 ```toml
-yewi-seo = "^0.1"
+yewi-seo = "0.2.0"
 ```
 
 ## Quickstart
@@ -93,7 +93,11 @@ apply_meta!(
 );
 ```
 
-Available directly: `apply_meta`, `apply_open_graph`, `apply_twitter_card`, `apply_link`, `apply_icon`.
+Available by adding `apply` feature: `apply_meta`, `apply_seo_open_graph`, `apply_seo_twitter_card`, `apply_seo_link`, `apply_icon`.
+
+```toml
+yewi-seo = { version = "0.2.0", features = ["apply"] }
+```
 
 ## Using the runtime functions directly
 
@@ -108,7 +112,7 @@ apply_seo_meta(SeoMetaProps {
 });
 ```
 
-Available directly: `apply_seo_meta`, `apply_seo_open_graph`, `apply_seo_twitter_card`, `apply_seo_link`, `apply_icons`, and their matching `*Props` structs.
+Available directly: `apply_seo_meta`, `apply_seo_open_graph`, `apply_seo_twitter_card`, `apply_seo_link`, `apply_seo_icons`, and their matching `*Props` structs.
 
 > Note: `yewi-seo` updates the document head on mount, so it is recommended to call these functions, or macros only once per page. The same applies to `seo` macro attribute.
 

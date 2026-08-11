@@ -4,7 +4,7 @@ use crate::utils::tag::upsert_tag;
 
 pub mod types;
 
-pub fn apply_link(props: types::LinkProps) {
+pub fn apply_seo_link(props: types::LinkProps) {
   let Some(doc) = window().and_then(|w| w.document()) else {  return };
   
   for (attr, value) in props.to_iter() {

@@ -1,6 +1,6 @@
 [package]
 name = "yewi-seo-macro"
-version = "0.1.1"
+version = "0.2.0"
 edition = "2024"
 authors = ["Fiaro Miangaly <fiaromiangaly@gmail.com>"]
 keywords = ["yew", "seo", "yewi-kit", "head", "web"]
@@ -21,4 +21,4 @@ rustversion.workspace = true
 [dev-dependencies]
 yew = "0.23.0"
 trybuild = { workspace = true }
-yewi-seo = { path = "../yewi-seo" }
+yewi-seo = { path = "../yewi-seo", features = ["apply"] }

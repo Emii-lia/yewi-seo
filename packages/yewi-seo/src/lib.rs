@@ -9,7 +9,7 @@
 //! ## Features
 //! - `#[seo(...)]` macro attributes (`meta(...)`, `open_graph(...)`, `twitter(...)`, `link(...)`, `icon(...)`)
 //!   placed **above** `#[function_component(...)]`. On mount, it injects a `use_effect_with` hook that writes the requested tags into `document.head`.
-//! - `apply_meta!(...)`, `apply_open_graph!(...)`, `apply_twitter_card!(...)`, `apply_link!(...)` and `apply_icon!(...)` macros that expand into calls to the corresponding runtime functions.
+//! - `apply_meta!(...)`, `apply_open_graph!(...)`, `apply_twitter_card!(...)`, `apply_link!(...)` and `apply_icon!(...)` macros that expand into calls to the corresponding apply functions.
 //!
 //! ## Examples
 //!
@@ -56,7 +56,7 @@
 //!   }
 //! }
 //! ```
-//! - Using `apply_*!(...)` macros
+//! - Using `apply_*!(...)` macros (available with `apply` feature enabled)
 //!
 //! ```rust,no_run
 //!use yew::{component, html, Html};
@@ -111,20 +111,30 @@ pub mod icon;
 pub mod twitter;
 
 pub use yewi_seo_macro::seo;
+
+#[cfg(feature = "apply")]
 pub use yewi_seo_macro::apply_meta;
+
+#[cfg(feature = "apply")]
 pub use yewi_seo_macro::apply_open_graph;
+
+#[cfg(feature = "apply")]
 pub use yewi_seo_macro::apply_twitter_card;
+
+#[cfg(feature = "apply")]
 pub use yewi_seo_macro::apply_link;
+
+#[cfg(feature = "apply")]
 pub use yewi_seo_macro::apply_icon;
 
-pub use meta::apply_seo_meta;
 pub use meta::types::SeoMetaProps;
-pub use open_graph::apply_open_graph as apply_seo_open_graph;
 pub use open_graph::types::OpenGraphProps;
-pub use twitter::apply_twitter_card as apply_seo_twitter_card;
 pub use twitter::types::TwitterCardProps;
-pub use link::apply_link as apply_seo_link;
 pub use link::types::LinkProps;
-pub use icon::apply_icons;
 pub use icon::types::IconProps;
 pub use icon::types::SeoIconProps;
+pub use meta::apply_seo_meta;
+pub use open_graph::apply_seo_open_graph;
+pub use twitter::apply_seo_twitter_card;
+pub use link::apply_seo_link;
+pub use icon::apply_seo_icons;

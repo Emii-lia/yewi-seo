@@ -1,6 +1,6 @@
 # yewi-seo-macros
 
-Procedural macro crate powering [`yewi-seo`](https://crates.io/crates/yewi-seo)'s `#[seo(...)]` attribute macro and `apply_meta`, `apply_link`, `apply_open_graph`, `apply_twitter_card` and `apply_icon` macros.
+Procedural macro crate powering [`yewi-seo`](https://crates.io/crates/yewi-seo)'s `#[seo(...)]` attribute macro and `apply_meta`, `apply_seo_link`, `apply_seo_open_graph`, `apply_seo_twitter_card` and `apply_icon` macros.
 
 > **You almost certainly don't want to depend on this crate directly.** Add [`yewi-seo`](https://crates.io/crates/yewi-seo) instead — it re-exports the macros along with the runtime functions the macro's generated code calls into.
 
@@ -12,7 +12,7 @@ Procedural macro crate powering [`yewi-seo`](https://crates.io/crates/yewi-seo)'
 2. Validates that the macro is applied above a plain `fn` (i.e. **before** `#[function_component(...)]` expands it into a struct/impl).
 3. Generates a `::yew::use_effect_with(...)` block that calls the matching `apply_*` runtime functions from `yewi-seo`, and splices it into the top of the function body.
 
-It also defines 5 other `#[proc_macro]` macros (`apply_meta`, `apply_open_graph`, `apply_twitter_card`, `apply_link`, `apply_icon`) that expand into calls to the corresponding runtime functions.
+It also defines 5 other `#[proc_macro]` macros (`apply_meta`, `apply_seo_open_graph`, `apply_seo_twitter_card`, `apply_seo_link`, `apply_icon`) that expand into calls to the corresponding runtime functions.
 
 ## Macro ordering
 

@@ -4,7 +4,7 @@ use crate::utils::tag::upsert_tag;
 
 pub mod types;
 
-pub fn apply_icons(props: SeoIconProps) {
+pub fn apply_seo_icons(props: SeoIconProps) {
   let Some(doc) = window().and_then(|w| w.document()) else {  return };
   
   for icon in props.icons {
