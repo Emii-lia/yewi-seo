@@ -83,11 +83,11 @@ impl IconEntry {
         }
     }
   }
-  
+
   pub fn build_icon_tokens(icon: Self) -> proc_macro2::TokenStream {
     let icon = icon.icon_entry_to_tokens();
     quote! {
-      ::yewi_seo::apply_icons(::yewi_seo::SeoIconProps {
+      ::yewi_seo::apply_seo_icons(::yewi_seo::SeoIconProps {
           icons: ::std::vec![#icon],
       })
     }
@@ -100,7 +100,7 @@ impl IconEntry {
       .collect();
 
     quote! {
-        ::yewi_seo::apply_icons(::yewi_seo::SeoIconProps {
+        ::yewi_seo::apply_seo_icons(::yewi_seo::SeoIconProps {
             icons: ::std::vec![#(#icon_tokens),*],
         })
     }

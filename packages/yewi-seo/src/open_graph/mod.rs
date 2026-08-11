@@ -5,7 +5,7 @@ use crate::utils::tag::upsert_tag;
 
 pub mod types;
 
-pub fn apply_open_graph(props: OpenGraphProps) {
+pub fn apply_seo_open_graph(props: OpenGraphProps) {
   let Some(doc) = window().and_then(|w| w.document()) else {  return };
 
   for (attr, value) in props.to_iter() {
