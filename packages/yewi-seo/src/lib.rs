@@ -14,6 +14,9 @@
 //! ## Examples
 //!
 //! - Using `#[seo(...)]`
+//!
+//! ### Yew
+//!
 //! ```rust, no_run
 //! use yew::prelude::*;
 //! use yewi_seo::seo;
@@ -56,6 +59,102 @@
 //!   }
 //! }
 //! ```
+//!
+//! ### Dioxus
+//!
+//! ```rust,no_run
+//! use dioxus::prelude::*;
+//! use yewi_seo::dioxus::seo;
+//!
+//! #[seo(
+//!   meta(
+//!     title = "Dioxus | Yewi",
+//!     description = "Yewi-seo example on Dioxus",
+//!     keywords("dioxus", "yewi", "yewi-seo", "seo"),
+//!   ),
+//!   open_graph(
+//!     title = "Dioxus | Yewi",
+//!     description = "Yewi-seo example on Dioxus",
+//!     url = "https://yewi.fiaro.app",
+//!     site_name = "Yewi",
+//!     locale = "en_US",
+//!     image = "https://yewi.fiaro.app/images/og.png",
+//!   ),
+//!   link(
+//!     canonical = "https://yewi.fiaro.app",
+//!   ),
+//!   twitter(
+//!     card = "summary_large_image",
+//!     site = "@Emii_lia",
+//!     creator = "@Emii_lia",
+//!     title = "Dioxus | Yewi",
+//!     description = "Yewi-seo example on Dioxus",
+//!     image = "https://yewi.fiaro.app/images/og.png",
+//!   )
+//! )]
+//! #[component]
+//! fn App() -> Element {
+//!   rsx! {
+//!     div { "Hello, Dioxus!" }
+//!   }
+//! }
+//! ```
+//!
+//! ### Leptos
+//!
+//! ```rust,no_run
+//! use leptos::prelude::*;
+//! use yewi_seo::leptos::seo;
+//!
+//! #[seo(
+//!   meta(
+//!     title = "Leptos | Yewi",
+//!     description = "Yewi-seo example on Leptos",
+//!     keywords = "leptos, yewi, yewi-seo, seo",
+//!   ),
+//!   open_graph(
+//!     title = "Leptos | Yewi",
+//!     description = "Yewi-seo example on Leptos",
+//!     url = "https://yewi.fiaro.app",
+//!     site_name = "Yewi",
+//!     locale = "en_US",
+//!     image = "https://yewi.fiaro.app/images/og.png",
+//!   ),
+//!   link(
+//!     canonical = "https://yewi.fiaro.app",
+//!   ),
+//!   twitter(
+//!     card = "summary_large_image",
+//!     site = "@Emii_lia",
+//!     creator = "@Emii_lia",
+//!     title = "Leptos | Yewi",
+//!     description = "Yewi-seo example on Leptos",
+//!     image = "https://yewi.fiaro.app/og-image.png",
+//!   ),
+//!   icon(
+//!     ( rel = "icon", href = "/favicon.ico" )
+//!   )
+//! )]
+//! #[component]
+//! fn App() -> impl IntoView {
+//!   let (count, set_count) = signal(0);
+//!
+//!   view! {
+//!     <h1>Hello, world!</h1>
+//!     <button
+//!       on:click=move |_| set_count.set(3)
+//!     >
+//!       "Click me: "
+//!       {count}
+//!     </button>
+//!     <p>
+//!        "Double count: "
+//!        {move || count.get() * 2}
+//!     </p>
+//!   }
+//! }
+//! ```
+//!
 //! - Using `apply_*!(...)` macros (available with `apply` feature enabled)
 //!
 //! ```rust,no_run
@@ -110,6 +209,15 @@ pub mod traits;
 pub mod icon;
 pub mod twitter;
 
+#[cfg(feature = "dioxus")]
+pub mod dioxus;
+
+#[cfg(feature = "leptos")]
+pub mod leptos;
+
+#[cfg(feature = "yew")]
+pub mod yew;
+
 pub use yewi_seo_macro::seo;
 
 #[cfg(feature = "apply")]
@@ -126,6 +234,7 @@ pub use yewi_seo_macro::apply_link;
 
 #[cfg(feature = "apply")]
 pub use yewi_seo_macro::apply_icon;
+
 
 pub use meta::types::SeoMetaProps;
 pub use open_graph::types::OpenGraphProps;

@@ -38,7 +38,7 @@ impl Parse for MetaEntry {
     let mut abstract_ = None;
     let mut category = None;
     let mut classification = None;
-    
+
     while !input.is_empty() {
       let lookahead = input.lookahead1();
       if lookahead.peek(kw::title) {
@@ -123,7 +123,7 @@ impl Parse for MetaEntry {
         input.parse::<Token![,]>()?;
       }
     }
-    
+
     Ok(Self {
       title,
       description,

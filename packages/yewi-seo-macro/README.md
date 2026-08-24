@@ -31,6 +31,7 @@ fn home() -> Html { html! {} }
 ```
 
 If `#[seo(...)]` isn't the outermost attribute, it receives an already-expanded struct/impl instead of a function, and the macro emits a compile error explaining the required order.
+Same goes for `dioxus` and `leptos` seo implementation.
 
 ## License
 

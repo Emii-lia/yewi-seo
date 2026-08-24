@@ -2,17 +2,19 @@
 
 ## About
 
-SEO metadata for [Yew](https://yew.rs) function components that sets your `<title>`, meta tags, Open Graph, Twitter Card, canonical links, and favicons declaratively with a single attribute macro.
+SEO metadata for [Yew](https://yew.rs), [Dioxus](https://dioxuslabs.com/) and [Leptos](https://leptos.dev) function components that sets your `<title>`, meta tags, Open Graph, Twitter Card, canonical links, and favicons declaratively with a single attribute macro.
 
 Part of the [`yewi`](https://yewi.fiaro.app) ecosystem.
 
 ## Installation
 
 ```toml
-yewi-seo = "0.2.0"
+yewi-seo = "1.0.0"
 ```
 
 ## Quickstart
+
+### Yew
 
 ```rust
 use yew::prelude::*;
@@ -43,13 +45,87 @@ use yewi_seo::seo;
 #[component(PricingPage)]
 fn pricing_page() -> Html {
   html! {
-      <div>{ "Pricing content" }</div>
-    }
+		<div>{ "Pricing content" }</div>
+	}
 }
 
 ```
 
-`#[seo(...)]` must always be placed **above** `#[component(...)]`. On mount, it injects a `use_effect_with` hook that writes the requested tags into `document.head`.
+### Dioxus
+
+```rust
+use dioxus::prelude::*;
+use yewi_seo::dioxus::seo;
+
+#[seo(
+  meta(
+    title = "Pricing – MyApp",
+    description = "Simple, transparent pricing for teams of any size.",
+  ),
+  open_graph(
+    title = "Pricing – MyApp",
+    image = "https://myapp.com/og/pricing.png",
+    url = "https://myapp.com/pricing",
+  ),
+  twitter(
+    card = "summary_large_image",
+    site = "@myapp",
+  ),
+  link(
+    canonical = "https://myapp.com/pricing",
+  ),
+  icon(
+    ( rel = "icon", href = "https://myapp.com/favicon.ico" ),
+    ( rel = "apple-touch-icon", href = "https://myapp.com/apple-touch-icon.png" ),
+  )
+)]
+#[component]
+fn PricingPage() -> Element {
+  rsx! {
+		div { "Pricing content" }
+	}
+}
+
+```
+
+### Leptos
+
+```rust
+use leptos::prelude::*;
+use yewi_seo::leptos::seo;
+
+#[seo(
+  meta(
+    title = "Pricing – MyApp",
+    description = "Simple, transparent pricing for teams of any size.",
+  ),
+  open_graph(
+    title = "Pricing – MyApp",
+    image = "https://myapp.com/og/pricing.png",
+    url = "https://myapp.com/pricing",
+  ),
+  twitter(
+    card = "summary_large_image",
+    site = "@myapp",
+  ),
+  link(
+    canonical = "https://myapp.com/pricing",
+  ),
+  icon(
+    ( rel = "icon", href = "https://myapp.com/favicon.ico" ),
+    ( rel = "apple-touch-icon", href = "https://myapp.com/apple-touch-icon.png" ),
+  )
+)]
+#[component]
+fn PricingPage() -> impl IntoView {
+  view! {
+		<div>"Pricing content"</div>
+	}
+}
+
+```
+
+`#[seo(...)]` must always be placed **above** `#[component]`. On mount, it injects a `use_effect_with` (`use_effect` and `Effect::new` for Dioxus and Leptos) hook that writes the requested tags into `document.head`.
 
 ## What it sets
 
@@ -81,7 +157,7 @@ fn app() -> Html { html! {} }
 
 ## Using macros
 
-You can also use the `apply_*` macro to apply SEO metadata individually:
+You can also use the `apply_*` macro to apply SEO metadata individually, by adding the `apply` feature:
 
 ```rust
 use yewi_seo::apply_meta;
@@ -123,7 +199,7 @@ Yew doesn't ship head/meta management out of the box, and reaching for `web_sys:
 ## Requirements
 
 - Compiles for `wasm32-unknown-unknown` (browser targets). Tag application is a no-op / not currently supported for SSR contexts.
-- Requires `yew` `^0.23` in your own `Cargo.toml`.
+- Requires `yew ^0.23` or `dioxus ^0.7.10` or `leptos ^0.8.20` in your own `Cargo.toml`. (check the [examples](https://github.com/Emii-lia/yewi-seo/tree/master/examples))
 
 ## License
 

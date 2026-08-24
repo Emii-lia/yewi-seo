@@ -1,5 +1,5 @@
 use yew::{component, html, Html};
-use yewi_seo::seo;
+use yewi_seo::yew::seo;
 
 #[seo(
   meta(

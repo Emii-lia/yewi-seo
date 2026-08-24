@@ -1,0 +1,12 @@
+error: #[seo(...)] must be placed above #[component(...)], e.g.:
+       #[seo(...)]
+       #[component]
+       fn Foo() -> impl IntoView { ... }
+ --> tests/leptos/applied_below_component_attr_fail.rs:5:1
+  |
+5 | / #[seo(
+6 | |   meta( title = "Hello Yewi" )
+7 | | )]
+  | |__^
+  |
+  = note: this error originates in the attribute macro `seo` (in Nightly builds, run with -Z macro-backtrace for more info)

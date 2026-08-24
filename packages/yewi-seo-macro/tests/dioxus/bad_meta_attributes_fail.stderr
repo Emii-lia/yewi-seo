@@ -1,0 +1,55 @@
+error: expected parentheses
+ --> tests/dioxus/bad_meta_attributes_fail.rs:5:8
+  |
+5 |   meta = ( title = "Hello, World!")
+  |        ^
+
+error: expected parentheses
+  --> tests/dioxus/bad_meta_attributes_fail.rs:17:8
+   |
+17 |   meta = "hello"
+   |        ^
+
+error: expected one of: `title`, `description`, `application_name`, `author`, `generator`, `keywords`, `referrer`, `creator`, `publisher`, `robots`, `theme_color`, `viewport`, `abstract_`, `category`, `classification`
+  --> tests/dioxus/bad_meta_attributes_fail.rs:29:9
+   |
+29 |   meta( x = "hello" )
+   |         ^
+
+error: expected one of: `title`, `description`, `application_name`, `author`, `generator`, `keywords`, `referrer`, `creator`, `publisher`, `robots`, `theme_color`, `viewport`, `abstract_`, `category`, `classification`
+  --> tests/dioxus/bad_meta_attributes_fail.rs:41:9
+   |
+41 |   meta( open_graph( title = "Open Graph title" ) )
+   |         ^^^^^^^^^^
+
+error: expected one of: `title`, `description`, `application_name`, `author`, `generator`, `keywords`, `referrer`, `creator`, `publisher`, `robots`, `theme_color`, `viewport`, `abstract_`, `category`, `classification`
+  --> tests/dioxus/bad_meta_attributes_fail.rs:53:9
+   |
+53 |   meta( twitter( title = "Twitter title" ) )
+   |         ^^^^^^^
+
+error: expected `=`
+  --> tests/dioxus/bad_meta_attributes_fail.rs:65:14
+   |
+65 |   meta( title( default = "Default title" ))
+   |              ^
+
+error: expected string literal
+  --> tests/dioxus/bad_meta_attributes_fail.rs:77:17
+   |
+77 |   meta( title = ( default = "Default title" ))
+   |                 ^
+
+error: expected string literal
+  --> tests/dioxus/bad_meta_attributes_fail.rs:89:20
+   |
+89 |   meta( keywords = ( "key1", "key2", "key3" ))
+   |                    ^
+
+warning: unused import: `dioxus::prelude::*`
+ --> tests/dioxus/bad_meta_attributes_fail.rs:1:5
+  |
+1 | use dioxus::prelude::*;
+  |     ^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
