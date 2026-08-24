@@ -110,6 +110,12 @@ pub mod traits;
 pub mod icon;
 pub mod twitter;
 
+#[cfg(feature = "dioxus")]
+pub mod dioxus;
+
+#[cfg(feature = "leptos")]
+pub mod leptos;
+
 pub use yewi_seo_macro::seo;
 
 #[cfg(feature = "apply")]
@@ -126,6 +132,7 @@ pub use yewi_seo_macro::apply_link;
 
 #[cfg(feature = "apply")]
 pub use yewi_seo_macro::apply_icon;
+
 
 pub use meta::types::SeoMetaProps;
 pub use open_graph::types::OpenGraphProps;

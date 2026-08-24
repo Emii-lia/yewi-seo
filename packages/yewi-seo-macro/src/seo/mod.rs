@@ -5,6 +5,8 @@ use crate::seo::types::entries::icon::IconEntry;
 use crate::seo::types::SeoArgs;
 
 pub mod types;
+pub mod dioxus;
+pub mod leptos;
 
 pub fn seo_impl(args: SeoArgs, item: ItemFn) -> syn::Result<TokenStream> {
   let ItemFn { attrs, vis, sig, block, modifiers: _modifiers } = item;

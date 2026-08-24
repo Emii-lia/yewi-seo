@@ -6,12 +6,12 @@
 //! #[seo(
 //!   meta(
 //!     title = "Yewi",
-//!     description = "Component-driven UI kit for Yew",
+//!     description = "Yewi-seo example on Leptos",
 //!     keywords = "yew, yewi, yew-component, tailwind, scss, component-driven, ui, kit",
 //!   ),
 //!   open_graph(
 //!     title = "Yewi",
-//!     description = "Component-driven UI kit for Yew",
+//!     description = "Yewi-seo example on Leptos",
 //!     url = "https://yewi.fiaro.app",
 //!     site_name = "Yewi",
 //!     locale = "en_US",
@@ -25,7 +25,7 @@
 //!     site = "@Emii_lia",
 //!     creator = "@Emii_lia",
 //!     title = "Yewi",
-//!     description = "Component-driven UI kit for Yew",
+//!     description = "Yewi-seo example on Leptos",
 //!     image = "https://yewi.fiaro.app/og-image.png",
 //!   ),
 //!   icon(
@@ -89,6 +89,8 @@
 use proc_macro::TokenStream;
 use syn::{parse, parse_macro_input, Error, ItemFn};
 use seo::types::SeoArgs;
+use crate::seo::dioxus::dioxus_seo_impl;
+use crate::seo::leptos::leptos_seo_impl;
 use crate::seo::seo_impl;
 use crate::seo::types::entries::icon::IconEntry;
 use crate::seo::types::entries::link::LinkEntry;
@@ -108,12 +110,12 @@ mod seo;
 /// #[seo(
 ///   meta(
 ///     title = "Yewi",
-///     description = "Component-driven UI kit for Yew",
+///     description = "Yewi-seo example on Leptos",
 ///     keywords = "yew, yewi, yew-component, tailwind, scss, component-driven, ui, kit",
 ///   ),
 ///   open_graph(
 ///     title = "Yewi",
-///     description = "Component-driven UI kit for Yew",
+///     description = "Yewi-seo example on Leptos",
 ///     url = "https://yewi.fiaro.app",
 ///     site_name = "Yewi",
 ///     locale = "en_US",
@@ -127,7 +129,7 @@ mod seo;
 ///     site = "@Emii_lia",
 ///     creator = "@Emii_lia",
 ///     title = "Yewi",
-///     description = "Component-driven UI kit for Yew",
+///     description = "Yewi-seo example on Leptos",
 ///     image = "https://yewi.fiaro.app/og-image.png",
 ///   ),
 ///   icon(
@@ -143,7 +145,7 @@ mod seo;
 ///   }
 /// }
 /// ```
-/// 
+///
 /// > Note: `#[seo]` marco attribute must always be placed above the `#[component]` macro attribute
 ///
 /// ## Attributes
@@ -173,7 +175,6 @@ mod seo;
 /// fn app() -> Html { html! {} }
 /// ```
 /// See: [yewi-seo docs](https://yewi.fiaro.app/ecosystem/yewi-seo)
-///
 #[proc_macro_attribute]
 pub fn seo(attr: TokenStream, item: TokenStream) -> TokenStream {
     let args = parse_macro_input!(attr as SeoArgs);
@@ -194,15 +195,206 @@ pub fn seo(attr: TokenStream, item: TokenStream) -> TokenStream {
       .unwrap_or_else(|err| TokenStream::from(err.to_compile_error()))
 }
 
+/// # Seo
+/// `#[seo]` macro attribute allows an easy SEO metadata implementation to Dioxus component page
+/// ## Usage
+/// ```
+/// use dioxus::prelude::*;
+/// use yewi_seo::dioxus::seo;
+///
+/// #[seo(
+///  meta(
+///    title = "Dioxus | Yewi",
+///    description = "Yewi-seo example on Dioxus",
+///    keywords("dioxus", "yewi", "yewi-seo", "seo"),
+///  ),
+///  open_graph(
+///    title = "Dioxus | Yewi",
+///    description = "Yewi-seo example on Dioxus",
+///    url = "https://yewi.fiaro.app",
+///    site_name = "Yewi",
+///    locale = "en_US",
+///    image = "https://yewi.fiaro.app/og-image.png",
+///  ),
+///  link(
+///    canonical = "https://yewi.fiaro.app",
+///  ),
+///  twitter(
+///    card = "summary_large_image",
+///    site = "@Emii_lia",
+///    creator = "@Emii_lia",
+///    title = "Dioxus | Yewi",
+///    description = "Yewi-seo example on Dioxus",
+///    image = "https://yewi.fiaro.app/og-image.png",
+///  ),
+///  icon(
+///    ( rel = "icon", href = "/favicon.ico" )
+///  )
+/// )]
+/// #[component]
+/// fn Home() -> Element {
+///   rsx! {
+///     div {
+///       class: "Home",
+///       "Hello, Yewi!"
+///     }
+///   }
+/// }
+/// ```
+///
+/// > Note: `#[seo]` marco attribute must always be placed above the `#[component]` macro attribute
+///
+/// ## Attributes
+///
+/// - **meta(...)** : `<title>`, `description`, `application` name, `author`, `generator`, `keywords`, `referrer`, `robots`, `theme-color`, `viewport`, `abstract`, `category`, `classification`
+/// - **open_graph(...)** : `title`, `description`, `image` (+ dimensions/alt/type/secure_url), `url`, `type`, `site_name`, `locale` (+ alternates), `audio`, `video`, and related fields
+/// - **twitter(...)** : Twitter Card tags — `card`, `site`, `creator`, `title`, `description`, `image` (+ alt/dimensions/type)
+/// - **link(...)** : `<link>` tags : `author`, `manifest`, `canonical`
+/// - **icon(...)** : One or more `<link rel="icon">`: style entries (`href`, `sizes`, `rel`, `color`)
+///
+/// ## Multiple icons
+///
+/// `icon` accepts a comma-separated list of entries:
+///
+/// ```
+///  use dioxus::prelude::*;
+///  use yewi_seo::dioxus::seo;
+///
+/// #[seo(
+///   icon(
+///     (href = "/favicon-32.png", sizes = "32x32", rel = "icon"),
+///     (href = "/favicon-16.png", sizes = "16x16", rel = "icon"),
+///     (href = "/apple-touch-icon.png", sizes = "180x180", rel = "apple-touch-icon")
+///   )
+/// )]
+/// #[component]
+/// fn App() -> Element { rsx! {} }
+/// ```
+/// See: [yewi-seo docs](https://yewi.fiaro.app/ecosystem/yewi-seo)
+#[proc_macro_attribute]
+pub fn dioxus_seo(attr: TokenStream, item: TokenStream) -> TokenStream {
+	let args = parse_macro_input!(attr as SeoArgs);
+	let item_fn = match parse::<ItemFn>(item.clone()) {
+		Ok(f) => f,
+		Err(_) => {
+			return Error::new(
+				proc_macro2::Span::call_site(),
+				"#[seo(...)] can only be applied to functions, e.g.:\n\
+				 #[seo(...)]\n\
+				 #[component]\n\
+				 fn Foo() -> Element { ... }",
+			).to_compile_error().into();
+		}
+	};
+
+	dioxus_seo_impl(args, item_fn)
+		.unwrap_or_else(|err| TokenStream::from(err.to_compile_error()))
+}
+
+/// # Seo
+/// `#[seo]` macro attribute allows an easy SEO metadata implementation to Leptos component page
+/// ## Usage
+/// ```
+/// use leptos::prelude::*;
+/// use yewi_seo::leptos::seo;
+///
+/// #[seo(
+///   meta(
+///     title = "Leptos | Yewi",
+///     description = "Yewi-seo example on Leptos",
+///     keywords = "leptos, yewi, yewi-seo, seo",
+///   ),
+///   open_graph(
+///     title = "Leptos | Yewi",
+///     description = "Yewi-seo example on Leptos",
+///     url = "https://yewi.fiaro.app",
+///     site_name = "Yewi",
+///     locale = "en_US",
+///     image = "https://yewi.fiaro.app/og-image.png",
+///   ),
+///   link(
+///     canonical = "https://yewi.fiaro.app",
+///   ),
+///   twitter(
+///     card = "summary_large_image",
+///     site = "@Emii_lia",
+///     creator = "@Emii_lia",
+///     title = "Leptos | Yewi",
+///     description = "Yewi-seo example on Leptos",
+///     image = "https://yewi.fiaro.app/og-image.png",
+///   ),
+///   icon(
+///     ( rel = "icon", href = "/favicon.ico" )
+///   )
+/// )]
+/// #[component]
+/// fn Home() -> impl IntoView {
+///   view! {
+///     <div class="Home">
+///       "Hello, Yewi!"
+///     </div>
+///   }
+/// }
+/// ```
+///
+/// > Note: `#[seo]` marco attribute must always be placed above the `#[component]` macro attribute
+///
+/// ## Attributes
+///
+/// - **meta(...)** : `<title>`, `description`, `application` name, `author`, `generator`, `keywords`, `referrer`, `robots`, `theme-color`, `viewport`, `abstract`, `category`, `classification`
+/// - **open_graph(...)** : `title`, `description`, `image` (+ dimensions/alt/type/secure_url), `url`, `type`, `site_name`, `locale` (+ alternates), `audio`, `video`, and related fields
+/// - **twitter(...)** : Twitter Card tags — `card`, `site`, `creator`, `title`, `description`, `image` (+ alt/dimensions/type)
+/// - **link(...)** : `<link>` tags : `author`, `manifest`, `canonical`
+/// - **icon(...)** : One or more `<link rel="icon">`: style entries (`href`, `sizes`, `rel`, `color`)
+///
+/// ## Multiple icons
+///
+/// `icon` accepts a comma-separated list of entries:
+///
+/// ```
+///  use leptos::prelude::*;
+///  use yewi_seo::seo;
+///
+/// #[seo(
+///   icon(
+///     (href = "/favicon-32.png", sizes = "32x32", rel = "icon"),
+///     (href = "/favicon-16.png", sizes = "16x16", rel = "icon"),
+///     (href = "/apple-touch-icon.png", sizes = "180x180", rel = "apple-touch-icon")
+///   )
+/// )]
+/// #[component]
+/// fn Home() -> impl IntoView { view! {} }
+/// ```
+/// See: [yewi-seo docs](https://yewi.fiaro.app/ecosystem/yewi-seo)
+#[proc_macro_attribute]
+pub fn leptos_seo(attr: TokenStream, item: TokenStream) -> TokenStream {
+	let args = parse_macro_input!(attr as SeoArgs);
+	let item_fn = match parse::<ItemFn>(item.clone()) {
+		Ok(f) => f,
+		Err(_) => {
+			return Error::new(
+				proc_macro2::Span::call_site(),
+				"#[seo(...)] can only be applied to functions, e.g.:\n\
+				 #[seo(...)]\n\
+				 #[component]\n\
+				 fn Foo() -> impl IntoView { ... }",
+			).to_compile_error().into();
+		}
+	};
+
+	leptos_seo_impl(args, item_fn)
+		.unwrap_or_else(|err| TokenStream::from(err.to_compile_error()))
+}
+
 /// # apply_meta!();
 /// Add meta head elements to yew component page.
-/// 
+///
 /// ## Usage
-/// 
+///
 /// ```
 /// use yew::prelude::*;
 /// use yewi_seo::apply_meta;
-/// 
+///
 /// #[component(About)]
 /// fn about() -> Html {
 ///   apply_meta!(
@@ -225,11 +417,11 @@ pub fn apply_meta(attr: TokenStream) -> TokenStream {
 /// # apply_open_graph!();
 /// Add open graph properties to yew component page.
 /// ## Usage
-/// 
+///
 /// ```
 /// use yew::prelude::*;
 /// use yewi_seo::apply_open_graph;
-/// 
+///
 /// #[component(About)]
 /// fn about() -> Html {
 ///   apply_open_graph!(
@@ -252,12 +444,12 @@ pub fn apply_open_graph(attr: TokenStream) -> TokenStream {
 
 /// # apply_twitter_card();
 /// Add twitter card properties to yew component page.
-/// 
+///
 /// ## Usage
-/// 
+///
 /// ```
 /// use yew::prelude::*;
-/// use yewi_seo::apply_twitter_card; 
+/// use yewi_seo::apply_twitter_card;
 ///
 /// #[component(About)]
 /// fn about() -> Html {
@@ -283,13 +475,13 @@ pub fn apply_twitter_card(attr: TokenStream) -> TokenStream {
 
 /// # apply_link();
 /// Add link head elements to yew component page.
-/// 
+///
 /// ## Usage
-/// 
+///
 /// ```
 /// use yew::prelude::*;
 /// use yewi_seo::apply_link;
-/// 
+///
 /// #[component(About)]
 /// fn about() -> Html {
 ///   apply_link!(
@@ -311,13 +503,13 @@ pub fn apply_link(attr: TokenStream) -> TokenStream {
 
 /// # apply_icon();
 /// Add icon attributes to yew component page.
-/// 
+///
 /// ## Usage
-/// 
+///
 /// ```
 /// use yew::prelude::*;
 /// use yewi_seo::apply_icon;
-/// 
+///
 /// #[component(About)]
 /// fn about() -> Html {
 ///   apply_icon!(

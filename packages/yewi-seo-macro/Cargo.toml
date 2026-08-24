@@ -20,5 +20,7 @@ rustversion.workspace = true
 
 [dev-dependencies]
 yew = "0.23.0"
+dioxus = "0.7.10"
+leptos = { version = "0.8.20", features = ["csr"] }
 trybuild = { workspace = true }
-yewi-seo = { path = "../yewi-seo", features = ["apply"] }
+yewi-seo = { path = "../yewi-seo", features = ["apply", "dioxus", "leptos"] }
