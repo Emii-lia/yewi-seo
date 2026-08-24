@@ -1,0 +1,13 @@
+error: expected one of: `meta`, `open_graph`, `twitter`, `link`, `icon`
+ --> tests/leptos/bad_attributes_fail.rs:4:7
+  |
+4 | #[seo(x)]
+  |       ^
+
+warning: unused import: `leptos::prelude::*`
+ --> tests/leptos/bad_attributes_fail.rs:1:5
+  |
+1 | use leptos::prelude::*;
+  |     ^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
