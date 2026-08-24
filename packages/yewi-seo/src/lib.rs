@@ -116,6 +116,9 @@ pub mod dioxus;
 #[cfg(feature = "leptos")]
 pub mod leptos;
 
+#[cfg(feature = "yew")]
+pub mod yew;
+
 pub use yewi_seo_macro::seo;
 
 #[cfg(feature = "apply")]
