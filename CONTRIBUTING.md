@@ -89,6 +89,9 @@ yewi-seo/
 │   ├── yewi-seo/           # Runtime library (re-exports the macro + sets <head>)
 │   │   ├── src/
 │   │   │   ├── lib.rs
+│   │   │   ├── dioxus.rs
+│   │   │   ├── leptos.rs
+│   │   │   ├── yew.rs
 │   │   │   ├── meta/
 │   │   │   ├── icon/
 │   │   │   ├── link/
@@ -104,7 +107,9 @@ yewi-seo/
 │       └── Cargo.toml
 │
 └── examples/
-    └── basic/               # Yewi-based demo app
+    └── basic/               # Yewi-seo yew demo app
+    └── dioxus-seo/               # Yewi-seo dioxus demo app
+    └── leptos-seo/               # Yewi-seo leptos demo app
 ```
 
 ### Package responsibilities
@@ -145,6 +150,8 @@ cargo make doc-test              # cargo test --doc --all-features
 
 ## Running the example
 
+### Yew
+
 ```shell
 cd examples/basic
 # Install dependencies (only once)
@@ -153,8 +160,22 @@ yewi install
 trunk serve --open
 ```
 
+
 The example requires the `wasm32-unknown-unknown` target (see
 [Prerequisites](#prerequisites)).
+
+### Dioxus
+
+```shell
+dx serve --package dioxus-seo
+```
+
+### Leptos
+
+```shell
+cd examples/leptos-seo
+trunk serve --open
+```
 
 ---
 

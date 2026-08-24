@@ -418,6 +418,8 @@ pub fn apply_meta(attr: TokenStream) -> TokenStream {
 /// Add open graph properties to yew component page.
 /// ## Usage
 ///
+/// ### Yew
+///
 /// ```
 /// use yew::prelude::*;
 /// use yewi_seo::apply_open_graph;
@@ -435,6 +437,46 @@ pub fn apply_meta(attr: TokenStream) -> TokenStream {
 ///   }
 /// }
 /// ```
+///
+/// ### Dioxus
+///
+/// ```
+/// use dioxus::prelude::*;
+/// use yewi_seo::apply_open_graph;
+///
+/// #[component]
+/// fn About() -> Element {
+///   apply_open_graph!(
+///     title = "About - Yewi",
+///     description = "About page of Yewi",
+///     url = "https://yewi.fiaro.app/about",
+///     image( url = "https://yewi.fiaro.app/images/og.png", width = "1200", height = "630", alt = "Yewi logo", type_ = "image/png" ),
+///   );
+///   rsx! {
+///     div { "About yewi" }
+///   }
+/// }
+/// ```
+/// ### Leptos
+///
+/// ```
+/// use leptos::prelude::*;
+/// use yewi_seo::apply_open_graph;
+///
+/// #[component]
+/// fn About() -> impl IntoView {
+///   apply_open_graph!(
+///     title = "About - Yewi",
+///     description = "About page of Yewi",
+///     url = "https://yewi.fiaro.app/about",
+///     image( url = "https://yewi.fiaro.app/images/og.png", width = "1200", height = "630", alt = "Yewi logo", type_ = "image/png" ),
+///   );
+///   view! {
+///     <div>"About yewi"</div>
+///   }
+/// }
+/// ```
+///
 /// See: [yewi-seo docs](https://yewi.fiaro.app/ecosystem/yewi-seo)
 #[proc_macro]
 pub fn apply_open_graph(attr: TokenStream) -> TokenStream {
@@ -446,6 +488,8 @@ pub fn apply_open_graph(attr: TokenStream) -> TokenStream {
 /// Add twitter card properties to yew component page.
 ///
 /// ## Usage
+///
+/// ### Yew
 ///
 /// ```
 /// use yew::prelude::*;
@@ -466,6 +510,52 @@ pub fn apply_open_graph(attr: TokenStream) -> TokenStream {
 ///   }
 /// }
 /// ```
+///
+/// ### Dioxus
+///
+/// ```
+/// use dioxus::prelude::*;
+/// use yewi_seo::apply_twitter_card;
+///
+/// #[component]
+/// fn About() -> Element {
+///   apply_twitter_card!(
+///     title = "About - Yewi",
+///     description = "About page of Yewi",
+///     image( url = "https://yewi.fiaro.app/images/card.png", width = "1200", height = "630", alt = "Yewi logo", type_ = "image/png" ),
+///     card = "summary_large_image",
+///     site = "@Emii_lia",
+///     creator = "@Emii_lia",
+///   );
+///   rsx! {
+///     div { "About yewi" }
+///   }
+/// }
+/// ```
+///
+/// ### Leptos
+///
+/// ```
+/// use leptos::prelude::*;
+/// use yewi_seo::apply_twitter_card;
+///
+/// #[component]
+/// fn About() -> impl IntoView {
+///   apply_twitter_card!(
+///     title = "About - Yewi",
+///     description = "About page of Yewi",
+///     image( url = "https://yewi.fiaro.app/images/card.png", width = "1200", height = "630", alt = "Yewi logo", type_ = "image/png" ),
+///     card = "summary_large_image",
+///     site = "@Emii_lia",
+///     creator = "@Emii_lia",
+///   );
+///   view! {
+///     <div>"About yewi"</div>
+///   }
+/// }
+/// ```
+///
+///
 /// See: [yewi-seo docs](https://yewi.fiaro.app/ecosystem/yewi-seo)
 #[proc_macro]
 pub fn apply_twitter_card(attr: TokenStream) -> TokenStream {
@@ -477,6 +567,7 @@ pub fn apply_twitter_card(attr: TokenStream) -> TokenStream {
 /// Add link head elements to yew component page.
 ///
 /// ## Usage
+/// ### Yew
 ///
 /// ```
 /// use yew::prelude::*;
@@ -494,6 +585,45 @@ pub fn apply_twitter_card(attr: TokenStream) -> TokenStream {
 ///   }
 /// }
 /// ```
+///
+/// ### Dioxus
+///
+/// ```
+/// use dioxus::prelude::*;
+/// use yewi_seo::apply_link;
+///
+/// #[component]
+/// fn About() -> Element {
+///   apply_link!(
+///     canonical = "https://yewi.fiaro.app/about",
+///     manifest = "/manifest.json",
+///     author = "https://fiaro.dev"
+///   );
+///   rsx! {
+///     div { "About yewi" }
+///   }
+/// }
+/// ```
+///
+/// ### Leptos
+///
+/// ```
+/// use leptos::prelude::*;
+/// use yewi_seo::apply_link;
+///
+/// #[component]
+/// fn About() -> impl IntoView {
+///   apply_link!(
+///     canonical = "https://yewi.fiaro.app/about",
+///     manifest = "/manifest.json",
+///     author = "https://fiaro.dev"
+///   );
+///   view! {
+///     <div>"About yewi"</div>
+///   }
+/// }
+/// ```
+///
 /// See: [yewi-seo docs](https://yewi.fiaro.app/ecosystem/yewi-seo)
 #[proc_macro]
 pub fn apply_link(attr: TokenStream) -> TokenStream {
@@ -505,6 +635,7 @@ pub fn apply_link(attr: TokenStream) -> TokenStream {
 /// Add icon attributes to yew component page.
 ///
 /// ## Usage
+/// ### Yew
 ///
 /// ```
 /// use yew::prelude::*;
@@ -523,6 +654,47 @@ pub fn apply_link(attr: TokenStream) -> TokenStream {
 ///   }
 /// }
 /// ```
+///
+/// ### Dioxus
+///
+/// ```
+/// use dioxus::prelude::*;
+/// use yewi_seo::apply_icon;
+///
+/// #[component]
+/// fn About() -> Element {
+///   apply_icon!(
+///     href = "/favicon.ico",
+///     rel = "icon",
+///     sizes = "32x32",
+///     type_ = "image/png"
+///   );
+///   rsx! {
+///     div { "About yewi" }
+///   }
+/// }
+/// ```
+///
+/// ### Leptos
+///
+/// ```
+/// use leptos::prelude::*;
+/// use yewi_seo::apply_icon;
+///
+/// #[component]
+/// fn About() -> impl IntoView {
+///   apply_icon!(
+///     href = "/favicon.ico",
+///     rel = "icon",
+///     sizes = "32x32",
+///     type_ = "image/png"
+///   );
+///   view! {
+///     <div>"About yewi"</div>
+///   }
+/// }
+/// ```
+///
 /// > Note: `href` attribute is required
 ///
 /// See: [yewi-seo docs](https://yewi.fiaro.app/ecosystem/yewi-seo)
