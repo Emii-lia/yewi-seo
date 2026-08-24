@@ -1,0 +1,43 @@
+error: expected parentheses
+ --> tests/dioxus/bad_twitter_attributes_fail.rs:5:11
+  |
+5 |   twitter = ( title = "Hello Yewi" )
+  |           ^
+
+error: expected parentheses
+  --> tests/dioxus/bad_twitter_attributes_fail.rs:17:11
+   |
+17 |   twitter = "Hello Yewi"
+   |           ^
+
+error: expected one of: `card`, `site`, `creator`, `title`, `description`, `image`
+  --> tests/dioxus/bad_twitter_attributes_fail.rs:29:12
+   |
+29 |   twitter( x = "Hello Yewi" )
+   |            ^
+
+error: expected `=`
+  --> tests/dioxus/bad_twitter_attributes_fail.rs:41:17
+   |
+41 |   twitter( title( default = "Default title" ) )
+   |                 ^
+
+error: expected string literal
+  --> tests/dioxus/bad_twitter_attributes_fail.rs:53:20
+   |
+53 |   twitter( title = ( default = "Default title" ) )
+   |                    ^
+
+error: Invalid card type: invalid_card
+  --> tests/dioxus/bad_twitter_attributes_fail.rs:65:19
+   |
+65 |   twitter( card = "invalid_card" )
+   |                   ^^^^^^^^^^^^^^
+
+warning: unused import: `dioxus::prelude::*`
+ --> tests/dioxus/bad_twitter_attributes_fail.rs:1:5
+  |
+1 | use dioxus::prelude::*;
+  |     ^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
