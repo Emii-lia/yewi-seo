@@ -1,0 +1,1 @@
+pub use yewi_seo_macro::dioxus_seo as seo;
