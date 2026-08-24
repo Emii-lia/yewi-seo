@@ -5,4 +5,4 @@ edition = "2024"
 
 [dependencies]
 leptos = { version = "0.8.20", features = ["csr"] }
-yewi-seo = { version = "0.2.0", path = "../../packages/yewi-seo", features = ["leptos"] }
+yewi-seo = { version = "1.0.0", path = "../../packages/yewi-seo", features = ["leptos"] }

@@ -8,7 +8,7 @@ edition = "2021"
 
 [dependencies]
 dioxus = { version = "0.7.1", features = [] }
-yewi-seo = { version = "0.2.0", path = "../../packages/yewi-seo" ,features = ["dioxus"] }
+yewi-seo = { version = "1.0.0", path = "../../packages/yewi-seo" ,features = ["dioxus"] }
 
 [features]
 default = ["web"]
