@@ -1,12 +1,12 @@
 [package]
 name = "yewi-seo-macro"
-version = "0.2.0"
+version = "1.0.0"
 edition = "2024"
 authors = ["Fiaro Miangaly <fiaromiangaly@gmail.com>"]
 keywords = ["yew", "seo", "yewi-kit", "head", "web"]
 categories = ["web-programming", "wasm", "gui"]
 repository = "https://github.com/Emii-lia/yewi-seo"
-description = "A Yew procedural macro library for managing SEO metadata in web applications."
+description = "A Yew, Dioxus and leptos procedural macro library for managing SEO metadata in web applications."
 license = "MIT"
 
 [lib]
