@@ -1,0 +1,1 @@
+pub use yewi_seo_macro::leptos_seo as seo;
